@@ -92,7 +92,7 @@ const Nav = styled.nav`
 `;
 
 const Logo = styled(motion.div)`
-  color: ${theme.colors.light};
+  color: ${theme.colors.primary};
   font-family: ${theme.fonts.heading};
   font-size: 1.5rem;
   font-weight: 700;
@@ -103,15 +103,15 @@ const NavLinks = styled.div`
   gap: ${theme.spacing.lg};
 
   a {
-    color: ${theme.colors.textLight};
+    color: ${theme.colors.primary};
     transition: all ${theme.transitions.default};
     font-weight: 500;
     padding: ${theme.spacing.xs} ${theme.spacing.sm};
     border-radius: 4px;
 
     &:hover {
-      color: ${theme.colors.light};
-      background-color: rgba(255, 255, 255, 0.1);
+      color: ${theme.colors.accent};
+      background-color: rgba(201, 184, 155, 0.1);
     }
   }
 
@@ -145,7 +145,7 @@ const SkipLink = styled.a`
 const Footer = styled.footer`
   background: ${theme.colors.glass.background};
   backdrop-filter: blur(8px);
-  color: ${theme.colors.textLight};
+  color: ${theme.colors.primary};
   padding: ${theme.spacing.lg} 0;
   text-align: center;
   position: relative;

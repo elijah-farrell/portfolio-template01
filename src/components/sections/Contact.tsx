@@ -10,7 +10,7 @@ const ContactSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: ${theme.colors.textLight};
+  color: ${theme.colors.primary};
   padding: ${theme.spacing.lg} 0;
 
   @media (min-width: ${theme.breakpoints.md}) {
@@ -33,7 +33,7 @@ const SectionTitle = styled(motion.h2)`
   text-align: center;
   font-size: clamp(2rem, 4vw, 2.5rem);
   margin-bottom: ${theme.spacing.lg};
-  color: ${theme.colors.light};
+  color: ${theme.colors.primary};
   position: relative;
 
   @media (min-width: ${theme.breakpoints.md}) {
@@ -61,7 +61,7 @@ const ContactContent = styled.div`
   backdrop-filter: blur(8px);
   padding: ${theme.spacing.lg};
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(246, 177, 122, 0.15);
+  box-shadow: 0 8px 32px rgba(201, 184, 155, 0.2);
 
   @media (min-width: ${theme.breakpoints.md}) {
     margin: ${theme.spacing.xl} auto;
@@ -72,7 +72,7 @@ const ContactContent = styled.div`
 const ContactText = styled(motion.p)`
   font-size: clamp(1rem, 2vw, 1.3rem);
   margin-bottom: ${theme.spacing.lg};
-  color: ${theme.colors.textLight};
+  color: ${theme.colors.primary};
   line-height: 1.8;
   opacity: 0.9;
 
@@ -112,7 +112,7 @@ const ContactEmail = styled(motion.a)`
 
   &:hover {
     background: ${theme.colors.gradient.accent};
-    color: ${theme.colors.textDark};
+    color: ${theme.colors.primary};
     transform: translateY(-3px);
     box-shadow: 0 6px 16px ${theme.colors.overlay.dark};
   }
@@ -141,7 +141,7 @@ const SocialLink = styled(motion.a)`
   justify-content: center;
   border-radius: 50%;
   background: ${theme.colors.glass.card};
-  box-shadow: 0 4px 12px rgba(246, 177, 122, 0.1);
+  box-shadow: 0 4px 12px rgba(201, 184, 155, 0.2);
 
   @media (min-width: ${theme.breakpoints.md}) {
     width: 60px;
@@ -150,9 +150,9 @@ const SocialLink = styled(motion.a)`
   }
 
   &:hover {
-    color: ${theme.colors.light};
+    color: ${theme.colors.primary};
     transform: translateY(-3px) rotate(8deg);
-    box-shadow: 0 6px 16px rgba(246, 177, 122, 0.2);
+    box-shadow: 0 6px 16px rgba(201, 184, 155, 0.3);
     background: ${theme.colors.gradient.glass};
   }
 `;

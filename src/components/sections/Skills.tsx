@@ -26,7 +26,7 @@ const SkillsSection = styled.section`
   align-items: center;
   position: relative;
   overflow: hidden;
-  color: ${theme.colors.textLight};
+  color: ${theme.colors.primary};
   padding: ${theme.spacing.lg} ${theme.spacing.md};
 
   @media (min-width: ${theme.breakpoints.md}) {
@@ -38,7 +38,7 @@ const SectionTitle = styled(motion.h2)`
   text-align: center;
   font-size: clamp(2rem, 4vw, 2.5rem);
   margin-bottom: ${theme.spacing.xl};
-  color: ${theme.colors.light};
+  color: ${theme.colors.primary};
   position: relative;
 
   &::after {
@@ -49,7 +49,7 @@ const SectionTitle = styled(motion.h2)`
     transform: translateX(-50%);
     width: 60px;
     height: 4px;
-    background-color: ${theme.colors.light};
+    background-color: ${theme.colors.accent};
     border-radius: 2px;
   }
 `;
@@ -90,7 +90,7 @@ const SkillCategory = styled(motion.div)`
 const CategoryTitle = styled.h3`
   font-size: clamp(1.5rem, 3vw, 1.75rem);
   margin-bottom: ${theme.spacing.xl};
-  color: ${theme.colors.light};
+  color: ${theme.colors.primary};
   display: flex;
   align-items: center;
   gap: ${theme.spacing.sm};
@@ -132,6 +132,7 @@ const SkillItem = styled(motion.div)`
   border-radius: 12px;
   transition: all ${theme.transitions.default};
   background: ${theme.colors.glass.card};
+  color: ${theme.colors.primary};
 
   svg {
     font-size: clamp(1.1rem, 2vw, 1.5rem);
@@ -142,11 +143,11 @@ const SkillItem = styled(motion.div)`
   &:hover {
     background: ${theme.colors.gradient.glass};
     transform: translateX(5px);
-    box-shadow: 0 4px 12px rgba(246, 177, 122, 0.2);
+    box-shadow: 0 4px 12px rgba(201, 184, 155, 0.3);
 
     svg {
       transform: scale(1.1) rotate(5deg);
-      color: ${theme.colors.light};
+      color: ${theme.colors.accent};
     }
   }
 `;

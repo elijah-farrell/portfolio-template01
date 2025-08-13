@@ -1,25 +1,25 @@
 export const theme = {
   colors: {
-    primary: '#2A2D3E',
-    secondary: '#454964',
-    accent: '#F6B17A',
-    light: '#F6B17A',
-    text: '#ffffff',
-    textLight: '#ffffff',
-    textDark: '#2A2D3E',
+    primary: '#1B1A18', // Dark brown / near black - Primary Text
+    secondary: '#7D7568', // Medium gray-brown - Secondary Text / Subtle Lines
+    accent: '#C9B89B', // Warm gold / champagne - Accent / Highlight
+    light: '#F6F2EC', // Very light beige / off-white - Background
+    text: '#1B1A18', // Dark brown for main text
+    textLight: '#7D7568', // Medium gray-brown for secondary text
+    textDark: '#1B1A18', // Dark brown for emphasis
     glass: {
-      background: 'rgba(255, 255, 255, 0.05)',
-      border: 'transparent',
-      card: 'rgba(42, 45, 62, 0.2)',
+      background: 'rgba(246, 242, 236, 0.95)', // Light beige with higher opacity for better contrast
+      border: 'rgba(201, 184, 155, 0.4)', // Warm gold with higher opacity
+      card: 'rgba(246, 242, 236, 0.98)', // Light beige card background with very high opacity
     },
     gradient: {
-      main: 'linear-gradient(135deg, #2A2D3E 0%, #454964 50%, #2A2D3E 100%)',
-      accent: 'linear-gradient(135deg, #F6B17A 0%, #f8c396 100%)',
-      glass: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+      main: 'linear-gradient(135deg, #F6F2EC 0%, #E8E0D8 50%, #F6F2EC 100%)', // Subtle beige gradient
+      accent: 'linear-gradient(135deg, #C9B89B 0%, #D4C4A8 100%)', // Warm gold gradient
+      glass: 'linear-gradient(135deg, rgba(246, 242, 236, 0.95) 0%, rgba(201, 184, 155, 0.1) 100%)', // Glass effect
     },
     overlay: {
-      light: 'rgba(255, 255, 255, 0.1)',
-      dark: 'rgba(42, 45, 62, 0.3)',
+      light: 'rgba(246, 242, 236, 0.8)', // Light beige overlay
+      dark: 'rgba(27, 26, 24, 0.1)', // Subtle dark overlay
     }
   },
   fonts: {

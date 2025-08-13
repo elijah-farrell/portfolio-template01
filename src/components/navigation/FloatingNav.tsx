@@ -83,8 +83,8 @@ const NavDot = styled(motion.button)<{ active: boolean }>`
     transition: all ${theme.transitions.default};
     box-shadow: 
       0 4px 12px rgba(0, 0, 0, 0.1),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-    color: ${theme.colors.light};
+      inset 0 0 0 1px rgba(201, 184, 155, 0.2);
+    color: ${theme.colors.primary};
     font-weight: 500;
     letter-spacing: 0.5px;
 

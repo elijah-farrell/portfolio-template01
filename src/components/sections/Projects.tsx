@@ -20,7 +20,7 @@ const SectionTitle = styled(motion.h2)`
   text-align: center;
   font-size: clamp(2rem, 4vw, 2.5rem);
   margin-bottom: calc(${theme.spacing.xl} * 1.5);
-  color: ${theme.colors.textLight};
+  color: ${theme.colors.primary};
   position: relative;
   
   &::after {
@@ -58,7 +58,7 @@ const ProjectCard = styled(motion.div)`
   backdrop-filter: blur(8px);
   border-radius: 12px;
   overflow: hidden;
-  color: ${theme.colors.textLight};
+  color: ${theme.colors.primary};
   transition: all ${theme.transitions.default};
   height: 100%;
   display: flex;
@@ -66,7 +66,7 @@ const ProjectCard = styled(motion.div)`
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(246, 177, 122, 0.15);
+    box-shadow: 0 8px 30px rgba(201, 184, 155, 0.2);
   }
 `;
 
@@ -107,12 +107,12 @@ const ProjectContent = styled.div`
 const ProjectTitle = styled.h3`
   font-size: clamp(1.25rem, 3vw, 1.5rem);
   margin-bottom: ${theme.spacing.sm};
-  color: ${theme.colors.light};
+  color: ${theme.colors.primary};
   font-weight: 600;
 `;
 
 const ProjectDescription = styled.p`
-  color: ${theme.colors.textLight};
+  color: ${theme.colors.primary};
   margin-bottom: ${theme.spacing.lg};
   font-size: clamp(0.9rem, 2vw, 1rem);
   line-height: 1.6;
@@ -147,9 +147,9 @@ const TechTag = styled.span`
 
   &:hover {
     background: ${theme.colors.gradient.accent};
-    color: ${theme.colors.textDark};
+    color: ${theme.colors.primary};
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(246, 177, 122, 0.2);
+    box-shadow: 0 4px 12px rgba(201, 184, 155, 0.3);
   }
 `;
 
@@ -158,7 +158,7 @@ const ProjectLinks = styled.div`
   gap: ${theme.spacing.md};
   margin-top: auto;
   padding-top: ${theme.spacing.md};
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(201, 184, 155, 0.2);
   
   a {
     color: ${theme.colors.accent};
@@ -168,7 +168,7 @@ const ProjectLinks = styled.div`
     border-radius: 4px;
     
     &:hover {
-      color: ${theme.colors.light};
+      color: ${theme.colors.primary};
       background: ${theme.colors.glass.card};
       transform: translateY(-2px);
     }

@@ -61,7 +61,7 @@ const Title = styled.h1`
   animation: ${fadeUpKeyframes} 0.5s ease-out forwards;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   margin-bottom: ${theme.spacing.md};
-  color: ${theme.colors.light};
+  color: ${theme.colors.primary};
   line-height: 1.1;
   letter-spacing: -0.02em;
   white-space: nowrap;
@@ -72,6 +72,7 @@ const Subtitle = styled.h2`
   opacity: 0;
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   margin-bottom: ${theme.spacing.lg};
+  color: ${theme.colors.primary};
   opacity: 0.9;
   font-weight: 500;
 `;
@@ -82,6 +83,7 @@ const Description = styled.p`
   font-size: clamp(1rem, 1.2vw, 1.2rem);
   max-width: 600px;
   margin-bottom: ${theme.spacing.xl};
+  color: ${theme.colors.primary};
   opacity: 0.8;
   line-height: 1.7;
 `;
@@ -93,7 +95,7 @@ const SocialLinks = styled.div`
   gap: ${theme.spacing.md};
   
   a {
-    color: ${theme.colors.textLight};
+    color: ${theme.colors.primary};
     font-size: 1.5rem;
     transition: all ${theme.transitions.default};
     padding: ${theme.spacing.xs};
@@ -104,10 +106,10 @@ const SocialLinks = styled.div`
     background: ${theme.colors.glass.background};
     
     &:hover {
-      color: ${theme.colors.light};
+      color: ${theme.colors.accent};
       transform: translateY(-3px);
       background: ${theme.colors.glass.card};
-      box-shadow: 0 4px 12px rgba(246, 177, 122, 0.2);
+      box-shadow: 0 4px 12px rgba(201, 184, 155, 0.3);
     }
   }
 
