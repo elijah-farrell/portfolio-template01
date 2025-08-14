@@ -1,6 +1,6 @@
 
 # Demo 
-https://simplec0de.github.io/portfolio-01/
+https://ef-portfolio01.vercel.app/
 
 ![Portfolio Preview](src/assets/default-preview.png)
 
@@ -26,8 +26,8 @@ A modern, responsive portfolio template built with React, TypeScript, and Vite. 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/simpleC0de/portfolio-01.git
-cd portfolio-01
+git clone https://github.com/elijah-farrell/portfolio-template.git
+cd portfolio-template
 ```
 
 2. Install dependencies:
