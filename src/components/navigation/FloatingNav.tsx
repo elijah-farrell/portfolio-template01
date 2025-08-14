@@ -159,19 +159,51 @@ export const FloatingNav = () => {
   useEffect(() => {
     const handleScroll = () => {
       const windowHeight = window.innerHeight;
+      const scrollY = window.scrollY;
+      const documentHeight = document.documentElement.scrollHeight;
       let currentSection = 'hero';
       
-      // Find which section is currently in view
-      sections.forEach((id) => {
-        const element = document.getElementById(id);
-        if (element) {
-          const { top, bottom } = element.getBoundingClientRect();
-          // Check if section is in the center of the viewport
-          if (top <= windowHeight / 2 && bottom >= windowHeight / 2) {
-            currentSection = id;
+      // Check if we're at the very bottom (footer area)
+      if (scrollY + windowHeight >= documentHeight - 100) {
+        currentSection = 'contact';
+      } else {
+        // Find which section is currently in view
+        let foundSection = false;
+        sections.forEach((id) => {
+          const element = document.getElementById(id);
+          if (element) {
+            const { top, bottom } = element.getBoundingClientRect();
+            // Check if section is in the center of the viewport
+            if (top <= windowHeight / 2 && bottom >= windowHeight / 2) {
+              currentSection = id;
+              foundSection = true;
+            }
           }
+        });
+        
+        // If no section found in center, find the closest section
+        if (!foundSection) {
+          let closestSection = 'hero';
+          let closestDistance = Infinity;
+          
+          sections.forEach((id) => {
+            const element = document.getElementById(id);
+            if (element) {
+              const { top, bottom } = element.getBoundingClientRect();
+              const center = (top + bottom) / 2;
+              const viewportCenter = windowHeight / 2;
+              const distance = Math.abs(center - viewportCenter);
+              
+              if (distance < closestDistance) {
+                closestDistance = distance;
+                closestSection = id;
+              }
+            }
+          });
+          
+          currentSection = closestSection;
         }
-      });
+      }
       
       // Update active section if it changed
       if (currentSection !== activeSection) {
@@ -195,6 +227,10 @@ export const FloatingNav = () => {
   const handleKeyDown = (e: React.KeyboardEvent, sectionId: string) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
+      // Show navbar when navigating
+      if (window.showNavbar) {
+        window.showNavbar();
+      }
       document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
       e.preventDefault();
@@ -204,8 +240,24 @@ export const FloatingNav = () => {
         : Math.min(sections.length - 1, currentIndex + 1);
       
       const nextSection = sections[nextIndex];
+      // Show navbar when navigating
+      if (window.showNavbar) {
+        window.showNavbar();
+      }
       document.getElementById(nextSection)?.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleNavClick = (sectionId: string) => {
+    // Show navbar when clicking navigation
+    console.log('Floating nav clicked for:', sectionId);
+    if (window.showNavbar) {
+      console.log('Calling showNavbar function');
+      window.showNavbar();
+    } else {
+      console.log('showNavbar function not found!');
+    }
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -234,7 +286,7 @@ export const FloatingNav = () => {
             <NavDot
               key={id}
               active={activeSection === id}
-              onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => handleNavClick(id)}
               onKeyDown={(e) => handleKeyDown(e, id)}
               data-tooltip={displayName}
               tabIndex={0}

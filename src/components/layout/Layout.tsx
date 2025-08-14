@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState, useRef, useCallback } from 'react';
 import { theme } from '../../styles/theme';
 import { FloatingNav } from '../navigation/FloatingNav';
 import PageFooter from './Footer';
@@ -8,6 +8,13 @@ import { useKeyboardNavigation } from '../../hooks/useKeyboardNavigation';
 
 interface LayoutProps {
   children: ReactNode;
+}
+
+// Extend Window interface to include our custom function
+declare global {
+  interface Window {
+    showNavbar?: () => void;
+  }
 }
 
 const LayoutWrapper = styled.div`
@@ -57,7 +64,7 @@ const LayoutWrapper = styled.div`
   }
 `;
 
-const Header = styled.header`
+const Header = styled(motion.header)`
   background: ${theme.colors.glass.background};
   backdrop-filter: blur(8px);
   padding: ${theme.spacing.md} 0;
@@ -145,7 +152,11 @@ const SkipLink = styled.a`
 
 export const Layout = ({ children }: LayoutProps) => {
   useKeyboardNavigation();
-
+  const [isVisible, setIsVisible] = useState(true);
+  const scrollDirection = useRef<'up' | 'down' | null>(null);
+  const lastScrollY = useRef(0);
+  const navigationTimeout = useRef<number | null>(null);
+  
   useEffect(() => {
     // Add keyboard navigation instructions to console
     console.info(
@@ -156,13 +167,103 @@ export const Layout = ({ children }: LayoutProps) => {
     );
   }, []);
 
+  // Function to show navbar (called from FloatingNav)
+  const showNavbar = useCallback(() => {
+    console.log('showNavbar called, setting isVisible to true');
+    setIsVisible(true);
+    
+    // Clear any existing timeout
+    if (navigationTimeout.current) {
+      clearTimeout(navigationTimeout.current);
+    }
+    
+    // Set a timeout to prevent navbar from hiding during smooth scroll
+    navigationTimeout.current = setTimeout(() => {
+      navigationTimeout.current = null;
+    }, 1000); // 1 second delay
+  }, []);
+
+  // Expose showNavbar function globally so FloatingNav can access it
+  useEffect(() => {
+    window.showNavbar = showNavbar;
+    return () => {
+      delete window.showNavbar;
+    };
+  }, [showNavbar]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Always show navbar at the top
+      if (currentScrollY < 100) {
+        setIsVisible(true);
+        scrollDirection.current = null;
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      // Don't hide navbar if we just clicked navigation (within timeout)
+      if (navigationTimeout.current) {
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      // Determine scroll direction with a small threshold to prevent jitter
+      const scrollDelta = currentScrollY - lastScrollY.current;
+      const threshold = 5; // Minimum scroll distance to trigger direction change
+      
+      if (Math.abs(scrollDelta) > threshold) {
+        if (scrollDelta > 0) {
+          // Scrolling down
+          if (scrollDirection.current !== 'down') {
+            scrollDirection.current = 'down';
+            console.log('Scrolling DOWN, hiding navbar');
+            setIsVisible(false);
+          }
+        } else if (scrollDelta < 0) {
+          // Scrolling up
+          if (scrollDirection.current !== 'up') {
+            scrollDirection.current = 'up';
+            console.log('Scrolling UP, showing navbar');
+            setIsVisible(true);
+          }
+        }
+      }
+      
+      console.log('Scroll:', { 
+        currentScrollY, 
+        lastScrollY: lastScrollY.current, 
+        scrollDelta,
+        scrollDirection: scrollDirection.current,
+        isVisible,
+        hasNavigationTimeout: !!navigationTimeout.current
+      });
+      
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (navigationTimeout.current) {
+        clearTimeout(navigationTimeout.current);
+      }
+    };
+  }, []);
+
   return (
     <LayoutWrapper>
       <SkipLink href="#main-content">
         Skip to main content
       </SkipLink>
 
-      <Header role="banner">
+      <Header 
+        role="banner"
+        initial={{ y: 0 }}
+        animate={{ y: isVisible ? 0 : -100 }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+      >
         <Nav role="navigation" aria-label="Main navigation">
           <div className="container">
             <Logo
@@ -175,12 +276,12 @@ export const Layout = ({ children }: LayoutProps) => {
               Portfolio
             </Logo>
             <NavLinks role="list">
-              <a href="#hero">Home</a>
-              <a href="#about">About</a>
-              <a href="#experience">Experience</a>
-              <a href="#services">Services</a>
-              <a href="#projects">Projects</a>
-              <a href="#contact">Contact</a>
+              <a href="#hero" onClick={() => setIsVisible(true)}>Home</a>
+              <a href="#about" onClick={() => setIsVisible(true)}>About</a>
+              <a href="#experience" onClick={() => setIsVisible(true)}>Experience</a>
+              <a href="#services" onClick={() => setIsVisible(true)}>Services</a>
+              <a href="#projects" onClick={() => setIsVisible(true)}>Projects</a>
+              <a href="#contact" onClick={() => setIsVisible(true)}>Contact</a>
             </NavLinks>
           </div>
         </Nav>
