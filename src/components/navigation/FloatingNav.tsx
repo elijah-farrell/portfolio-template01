@@ -8,7 +8,7 @@ const NavContainer = styled(motion.nav)`
   right: ${theme.spacing.xl};
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1000;
+  z-index: 100;
   background: ${theme.colors.glass.background}80;
   backdrop-filter: blur(10px);
   padding: ${theme.spacing.lg};
@@ -24,11 +24,40 @@ const NavContainer = styled(motion.nav)`
     display: none;
   }
 
-  @media (max-width: ${theme.breakpoints.sm}) {
-    right: ${theme.spacing.sm};
+  @media (max-width: ${theme.breakpoints.md}) {
+    display: none;
+  }
+
+  @media (max-width: 1669px) {
+    right: ${theme.spacing.lg};
     padding: ${theme.spacing.md};
-    gap: ${theme.spacing.lg};
-    background: ${theme.colors.glass.background};
+    gap: ${theme.spacing.sm};
+  }
+
+  @media (max-width: 1474px) {
+    right: ${theme.spacing.md};
+    padding: ${theme.spacing.sm};
+    gap: ${theme.spacing.xs};
+  }
+
+  @media (max-width: 1300px) {
+    right: ${theme.spacing.sm};
+    padding: ${theme.spacing.xs};
+    gap: ${theme.spacing.xs};
+  }
+
+  @media (max-width: 1140px) {
+    right: ${theme.spacing.sm};
+    padding: ${theme.spacing.xs};
+    gap: ${theme.spacing.xs};
+  }
+
+  @media (max-width: ${theme.breakpoints.lg}) and (min-width: ${theme.breakpoints.md}) {
+    right: ${theme.spacing.sm};
+    padding: 2px;
+    gap: 1px;
+    border-radius: 15px;
+    min-width: 6px;
   }
 
   @media (max-height: 500px) {
@@ -38,79 +67,160 @@ const NavContainer = styled(motion.nav)`
 `;
 
 const NavDot = styled(motion.button)<{ active: boolean }>`
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: ${props => props.active ? theme.colors.accent : 'rgba(255, 255, 255, 0.3)'};
-  border: 2px solid ${props => props.active ? theme.colors.accent : 'rgba(255, 255, 255, 0.5)'};
+  border: 2px solid ${theme.colors.accent};
+  background: ${props => props.active ? theme.colors.accent : 'transparent'};
   cursor: pointer;
-  position: relative;
-  opacity: ${props => props.active ? 1 : 0.7};
   transition: all ${theme.transitions.default};
-
-  @media (max-width: ${theme.breakpoints.sm}) {
-    width: 14px;
-    height: 14px;
-  }
+  position: relative;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 
   &:hover {
-    opacity: 1;
+    background: ${theme.colors.accent};
     transform: scale(1.2);
     border-color: ${theme.colors.accent};
-    background: ${props => props.active ? theme.colors.accent : 'rgba(255, 255, 255, 0.5)'};
   }
 
   &:focus {
     outline: none;
-    box-shadow: 
-      0 0 0 2px ${theme.colors.accent}40,
-      0 0 0 4px ${theme.colors.accent}20;
+    box-shadow: 0 0 0 3px ${theme.colors.accent}40;
+  }
+
+  &:focus:not(:focus-visible) {
+    box-shadow: none;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: 1669px) {
+    width: 14px;
+    height: 14px;
+    border-width: 2px;
+  }
+
+  @media (max-width: 1474px) {
+    width: 12px;
+    height: 12px;
+    border-width: 1.5px;
+  }
+
+  @media (max-width: 1300px) {
+    width: 10px;
+    height: 10px;
+    border-width: 1.5px;
+  }
+
+  @media (max-width: 1140px) {
+    width: 8px;
+    height: 8px;
+    border-width: 1px;
+  }
+
+  @media (max-width: ${theme.breakpoints.lg}) and (min-width: ${theme.breakpoints.md}) {
+    width: 6px;
+    height: 6px;
+    border-width: 1px;
+  }
+`;
+
+const Tooltip = styled.div`
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: ${theme.colors.glass.card};
+  color: ${theme.colors.text};
+  padding: ${theme.spacing.xs} ${theme.spacing.sm};
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-right: ${theme.spacing.sm};
+  opacity: 0;
+  visibility: hidden;
+  transition: all ${theme.transitions.default};
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid ${theme.colors.glass.border};
+  pointer-events: none;
+  z-index: 101;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid ${theme.colors.glass.card};
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
   }
 
   &::before {
-    content: attr(data-tooltip);
+    content: '';
     position: absolute;
-    right: 24px;
+    right: -7px;
     top: 50%;
     transform: translateY(-50%);
-    background: ${theme.colors.glass.card};
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: all ${theme.transitions.default};
-    box-shadow: 
-      0 4px 12px rgba(0, 0, 0, 0.1),
-      inset 0 0 0 1px rgba(201, 184, 155, 0.2);
-    color: ${theme.colors.primary};
-    font-weight: 500;
-    letter-spacing: 0.5px;
-
-    @media (max-width: ${theme.breakpoints.sm}) {
-      right: auto;
-      left: -16px;
-      transform: translate(-100%, -50%);
-      font-size: 0.85rem;
-      padding: 6px 12px;
-    }
+    width: 0;
+    height: 0;
+    border-left: 7px solid ${theme.colors.glass.border};
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
   }
 
-  &:hover::before {
+  @media (max-width: 1669px) {
+    font-size: 0.8rem;
+    padding: ${theme.spacing.xs};
+    margin-right: ${theme.spacing.xs};
+  }
+
+  @media (max-width: 1474px) {
+    font-size: 0.75rem;
+    padding: 2px ${theme.spacing.xs};
+    margin-right: ${theme.spacing.xs};
+  }
+
+  @media (max-width: 1300px) {
+    font-size: 0.7rem;
+    padding: 2px 4px;
+    margin-right: 4px;
+  }
+
+  @media (max-width: 1140px) {
+    font-size: 0.65rem;
+    padding: 1px 3px;
+    margin-right: 3px;
+  }
+
+  @media (max-width: ${theme.breakpoints.lg}) and (min-width: ${theme.breakpoints.md}) {
+    display: none;
+  }
+`;
+
+const NavDotWithTooltip = styled.div`
+  position: relative;
+
+  &:hover ${Tooltip} {
     opacity: 1;
-    transform: translate(-100%, -50%);
-
-    @media (min-width: ${theme.breakpoints.sm}) {
-      right: 32px;
-      transform: translateY(-50%) scale(1.02);
-    }
+    visibility: visible;
+    transition-delay: 0.2s;
   }
 
-  @media (hover: none) {
-    &:active {
-      transform: scale(0.95);
-    }
+  ${Tooltip} {
+    transition-delay: 0s;
   }
 `;
 
@@ -250,12 +360,8 @@ export const FloatingNav = () => {
 
   const handleNavClick = (sectionId: string) => {
     // Show navbar when clicking navigation
-    console.log('Floating nav clicked for:', sectionId);
     if (window.showNavbar) {
-      console.log('Calling showNavbar function');
       window.showNavbar();
-    } else {
-      console.log('showNavbar function not found!');
     }
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -283,19 +389,21 @@ export const FloatingNav = () => {
         {sections.map((id) => {
           const displayName = id === 'hero' ? 'Home' : id.charAt(0).toUpperCase() + id.slice(1);
           return (
-            <NavDot
-              key={id}
-              active={activeSection === id}
-              onClick={() => handleNavClick(id)}
-              onKeyDown={(e) => handleKeyDown(e, id)}
-              data-tooltip={displayName}
-              tabIndex={0}
-              aria-label={`${displayName} section ${activeSection === id ? '(current section)' : ''}`}
-              aria-current={activeSection === id ? 'true' : undefined}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-              role="button"
-            />
+            <NavDotWithTooltip key={id}>
+              <NavDot
+                active={activeSection === id}
+                onClick={() => handleNavClick(id)}
+                onKeyDown={(e) => handleKeyDown(e, id)}
+                data-tooltip={displayName}
+                tabIndex={0}
+                aria-label={`${displayName} section ${activeSection === id ? '(current section)' : ''}`}
+                aria-current={activeSection === id ? 'true' : undefined}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                role="button"
+              />
+              <Tooltip>{displayName}</Tooltip>
+            </NavDotWithTooltip>
           );
         })}
       </NavContainer>

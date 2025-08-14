@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { theme } from '../../styles/theme';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaUser, FaLightbulb, FaCheckCircle, FaHeart, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import aboutPfpImage from '../../assets/about-pfp.jpg';
 
 interface SlideData {
@@ -55,12 +55,24 @@ const AboutContent = styled.div`
   grid-template-columns: 1fr;
   gap: ${theme.spacing.xl};
   margin-bottom: ${theme.spacing.xl};
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
 
-  @media (min-width: ${theme.breakpoints.md}) {
+  @media (min-width: 768px) {
+    width: 90%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 85%;
     grid-template-columns: 1fr 1fr;
     gap: ${theme.spacing.xl};
     align-items: stretch;
-    min-height: 450px;
+  }
+
+  @media (min-width: 1200px) {
+    width: 80%;
   }
 `;
 
@@ -68,7 +80,7 @@ const AboutText = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.lg};
-  height: 100%;
+  flex: 1;
 `;
 
 const AboutParagraph = styled.p`
@@ -82,16 +94,19 @@ const ImageSlider = styled.div`
   position: relative;
   width: 100%;
   max-width: 500px;
-  height: 100%;
-  min-height: 400px;
+  aspect-ratio: 1;
   margin: 0 auto;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(201, 184, 155, 0.2);
+  flex-shrink: 0;
 
-  @media (min-width: ${theme.breakpoints.md}) {
+  @media (min-width: 1024px) {
+    width: 500px;
+    height: 500px;
     margin: 0;
-    min-height: 450px;
+    flex-shrink: 0;
+    align-self: center;
   }
 `;
 
@@ -271,14 +286,14 @@ const About = () => {
     }
   ];
 
-  const startTimer = () => {
+  const startTimer = useCallback(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
     intervalRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 4000);
-  };
+  }, [slides.length]);
 
   // Auto-advance slides every 4 seconds
   useEffect(() => {
@@ -288,7 +303,7 @@ const About = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [slides.length]);
+  }, [startTimer]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);

@@ -1,26 +1,15 @@
 
-# Demo 
+# Demo
 https://ef-portfolio01.vercel.app/
 
 ![Portfolio Preview](src/assets/default-preview.png)
 
 # Modern Portfolio Template
 
-A modern, responsive portfolio template built with React, TypeScript, and Vite. Features smooth animations, optimized performance, and accessibility-first design.
+A modern, responsive portfolio template built with React, TypeScript, and Vite. Features smooth animations and accessibility-first design.
 
-## 🚀 Features
-
-- **Modern Tech Stack**: React 19, TypeScript, Vite 6
-- **Styled with Emotion**: Utilizes `@emotion/styled` for component-based styling
-- **Smooth Animations**: Powered by Framer Motion
-- **Optimized Performance**:
-  - Automatic code splitting
-  - Brotli & Gzip compression
-  - Lazy-loaded components
-  - Bundle size visualization
-- **Fully Responsive**: Works seamlessly on all devices
-- **Accessibility**: ARIA labels and semantic HTML
-- **Dark Mode Ready**: Built-in theming support
+- **Tech Stack**: React 18, TypeScript, Vite
+- **Fully Responsive**: Responsive design that works on all devices
 
 ## 🛠️ Installation
 
@@ -40,66 +29,61 @@ npm install
 npm run dev
 ```
 
-## 📝 Customization
+## 🎨 Customization
 
 ### Personal Information
 Edit the following files to customize your portfolio:
 
 1. `src/components/sections/Hero.tsx`:
    - Update your name, title, and description
-   - Modify social media links
+   - Modify social media links and profile image
 
-2. `src/components/sections/Projects.tsx`:
+2. `src/components/sections/About.tsx`:
+   - Update your personal story and background
+   - Modify the image slider content
+
+3. `src/components/sections/Projects.tsx`:
    - Add your projects and their details
-
-3. `src/components/sections/Skills.tsx`:
-   - Update your skills and expertise
+   - Update project images and links
 
 4. `src/components/sections/Contact.tsx`:
-   - Customize contact information
+   - Customize contact information and social links
+
+5. `src/components/sections/Experience.tsx`:
+   - Update your work experience and timeline
+
+6. `src/components/sections/Services.tsx`:
+   - List your services and expertise areas
 
 ### Styling
 - Theme customization: `src/styles/theme.ts`
 - Global styles: `src/styles/GlobalStyles.tsx`
+- Color scheme and spacing can be adjusted in the theme file
 
 ## 🚀 Deployment
 
-This template is configured for GitHub Pages deployment by default. The `vite.config.ts` is set up with:
-```typescript
-base: '/portfolio-01/'  // Change this to your repo name
-```
+This project is currently deployed on Vercel. The deployment is configured through:
 
-To deploy:
+1. **Vercel Integration**: Connected to the GitHub repository for automatic deployments
+2. **Build Command**: `npm run build`
+3. **Output Directory**: `dist`
 
-1. Update the `base` in `vite.config.ts` to match your repository name:
-```typescript
-base: '/your-repo-name/'
-```
+### Local Development
 
-2. Build the project:
+For local development and testing:
 ```bash
-npm run build
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Lint code with ESLint
 ```
-
-3. Deploy to GitHub Pages:
-   - Push to your GitHub repository
-   - Enable GitHub Pages in repository settings
-   - Select the `gh-pages` branch as source
-
-### Alternative Deployment
-
-For other platforms (Vercel, Netlify, etc.):
-1. Remove or update the `base` property in `vite.config.ts`
-2. Follow the platform-specific deployment instructions
-
-
 
 ## 📦 Available Scripts
 
 - `npm run dev`: Start development server
 - `npm run build`: Build for production
 - `npm run preview`: Preview production build
-- `npm run lint`: Lint code
+- `npm run lint`: Lint code with ESLint
 
 ## 🔧 System Requirements
 
@@ -108,4 +92,4 @@ For other platforms (Vercel, Netlify, etc.):
 
 ## 📄 License
 
-MIT License - feel free to use this template for your portfolio!
+MIT License - feel free to use this tempalte for your portfolio!

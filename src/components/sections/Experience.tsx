@@ -65,6 +65,15 @@ const Timeline = styled.div`
   @media (min-width: ${theme.breakpoints.md}) {
     width: 90%;
   }
+
+  @media (min-width: ${theme.breakpoints.lg}) {
+    width: 85%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 80%;
+    max-width: 1000px;
+  }
 `;
 
 const TimelineItem = styled(motion.div)`

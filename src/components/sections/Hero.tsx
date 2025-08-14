@@ -21,23 +21,11 @@ const HeroSection = styled.section`
   @media (min-width: ${theme.breakpoints.md}) {
     padding: ${theme.spacing.xl} 0;
   }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 95%;
-    
-    @media (min-width: ${theme.breakpoints.sm}) {
-      width: 90%;
-    }
-  }
 `;
 
 const HeroContent = styled.div`
   position: relative;
   z-index: 1;
-  max-width: 1200px;
-  width: 100%;
   background: ${theme.colors.glass.background};
   backdrop-filter: blur(8px);
   border-radius: 20px;
@@ -45,13 +33,34 @@ const HeroContent = styled.div`
   border: none;
   display: grid;
   grid-template-columns: 1fr;
-  gap: ${theme.spacing.xl};
+  gap: ${theme.spacing.lg};
   align-items: center;
+  width: 100%;
 
-  @media (min-width: ${theme.breakpoints.md}) {
+  @media (min-width: 1024px) {
     padding: ${theme.spacing.xl};
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 0.45fr 0.55fr;
     gap: ${theme.spacing.xl};
+  }
+
+  @media (min-width: 1030px) {
+    grid-template-columns: 0.42fr 0.58fr;
+    gap: ${theme.spacing.xl};
+  }
+
+  @media (min-width: 1160px) {
+    grid-template-columns: 0.4fr 0.6fr;
+    gap: ${theme.spacing.xl};
+  }
+
+  @media (min-width: 1285px) {
+    grid-template-columns: 0.35fr 0.65fr;
+    gap: ${theme.spacing.xl};
+  }
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    padding: ${theme.spacing.md};
+    gap: ${theme.spacing.lg};
   }
 `;
 
@@ -61,8 +70,8 @@ const HeroText = styled.div`
 `;
 
 const HeroImage = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   overflow: hidden;
   border: 4px solid ${theme.colors.accent};
@@ -73,15 +82,41 @@ const HeroImage = styled.div`
   background-repeat: no-repeat;
   margin: 0 auto;
 
-  @media (min-width: ${theme.breakpoints.md}) {
-    width: 250px;
-    height: 250px;
-    margin: 0;
+  @media (max-width: ${theme.breakpoints.sm}) {
+    width: 150px;
+    height: 150px;
+    border-width: 3px;
   }
 
-  @media (min-width: ${theme.breakpoints.lg}) {
-    width: 300px;
-    height: 300px;
+  @media (min-width: ${theme.breakpoints.md}) {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 1024px) {
+    width: 220px;
+    height: 220px;
+    margin: 0;
+    margin-right: 3rem;
+  }
+
+  @media (min-width: 1030px) {
+    width: 225px;
+    height: 225px;
+    margin-right: 3.25rem;
+  }
+
+  @media (min-width: 1160px) {
+    width: 240px;
+    height: 240px;
+    margin-right: 3.5rem;
+  }
+
+  @media (min-width: 1285px) {
+    width: 280px;
+    height: 280px;
+    margin-right: 4rem;
   }
 `;
 
@@ -104,6 +139,14 @@ const Title = styled.h1`
   line-height: 1.1;
   letter-spacing: -0.02em;
   white-space: nowrap;
+
+  @media (max-width: 1160px) {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+
+  @media (max-width: 1475px) {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
 `;
 
 const Subtitle = styled.h2`
@@ -114,6 +157,14 @@ const Subtitle = styled.h2`
   color: ${theme.colors.primary};
   opacity: 0.9;
   font-weight: 500;
+
+  @media (max-width: 1160px) {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  }
+
+  @media (max-width: 1475px) {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
 `;
 
 const Description = styled.p`
@@ -121,10 +172,22 @@ const Description = styled.p`
   opacity: 0;
   font-size: clamp(1rem, 1.2vw, 1.2rem);
   max-width: 600px;
-  margin-bottom: ${theme.spacing.xl};
+  margin-bottom: ${theme.spacing.lg};
   color: ${theme.colors.primary};
   opacity: 0.8;
   line-height: 1.7;
+
+  @media (max-width: 1160px) {
+    font-size: clamp(0.9rem, 1.1vw, 0.95rem);
+  }
+
+  @media (min-width: 1024px) {
+    margin-bottom: ${theme.spacing.xl};
+  }
+
+  @media (max-width: 1475px) {
+    font-size: clamp(0.9rem, 1.1vw, 1rem);
+  }
 `;
 
 const SocialLinks = styled.div`
@@ -152,11 +215,35 @@ const SocialLinks = styled.div`
     }
   }
 
+  @media (max-width: 1160px) {
+    a {
+      font-size: 1.25rem;
+    }
+  }
+
+  @media (max-width: 1475px) {
+    a {
+      font-size: 1.25rem;
+    }
+  }
+
   @media (min-width: ${theme.breakpoints.md}) {
     gap: ${theme.spacing.lg};
     
     a {
       font-size: 1.75rem;
+    }
+  }
+
+  @media (min-width: ${theme.breakpoints.md}) and (max-width: 1475px) {
+    a {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (min-width: ${theme.breakpoints.md}) and (max-width: 1160px) {
+    a {
+      font-size: 1.4rem;
     }
   }
 `;

@@ -42,14 +42,20 @@ const SectionTitle = styled(motion.h2)`
 
 const ProjectGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  grid-template-columns: 1fr;
   gap: ${theme.spacing.lg};
   width: 100%;
   margin-top: ${theme.spacing.lg};
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 
-  @media (min-width: ${theme.breakpoints.md}) {
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
     gap: ${theme.spacing.xl};
     margin-top: ${theme.spacing.xl};
+    width: 80%;
+    max-width: 1200px;
   }
 `;
 
@@ -72,7 +78,7 @@ const ProjectCard = styled(motion.div)`
 
 const ProjectImage = styled.div`
   width: 100%;
-  height: 200px;
+  height: 160px;
   border-radius: 12px;
   overflow: hidden;
   background: ${theme.colors.glass.background};
@@ -93,15 +99,27 @@ const ProjectImage = styled.div`
     object-fit: cover;
     object-position: center;
   }
+
+  @media (min-width: ${theme.breakpoints.md}) {
+    height: 180px;
+  }
+
+  @media (min-width: ${theme.breakpoints.lg}) {
+    height: 200px;
+  }
 `;
 
 const ProjectContent = styled.div`
-  padding: ${theme.spacing.md};
+  padding: ${theme.spacing.sm};
   flex: 1;
   display: flex;
   flex-direction: column;
 
   @media (min-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing.md};
+  }
+
+  @media (min-width: ${theme.breakpoints.lg}) {
     padding: ${theme.spacing.lg};
   }
 `;
@@ -212,24 +230,6 @@ const projectsData = [
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
     imagePlaceholder: "Coaching session or performance improvement charts",
     technologies: ["Leadership Development", "Performance Management", "Training Design"],
-    link: "#"
-  },
-  {
-    id: 5,
-    title: "Digital Innovation Strategy",
-    description: "Created a roadmap for digital innovation that positioned the organization as an industry leader and increased market share by 15%.",
-    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop",
-    imagePlaceholder: "Innovation strategy presentation or digital roadmap",
-    technologies: ["Digital Strategy", "Innovation Management", "Market Analysis"],
-    link: "#"
-  },
-  {
-    id: 6,
-    title: "Organizational Change Management",
-    description: "Successfully guided a major organizational restructuring that improved operational efficiency by 45% and employee engagement by 35%.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-    imagePlaceholder: "Organizational chart or change management timeline",
-    technologies: ["Change Management", "Organizational Design", "Employee Engagement"],
     link: "#"
   }
 ];

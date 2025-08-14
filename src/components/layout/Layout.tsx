@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ReactNode, useEffect, useState, useRef, useCallback } from 'react';
 import { theme } from '../../styles/theme';
 import { FloatingNav } from '../navigation/FloatingNav';
 import PageFooter from './Footer';
 import { useKeyboardNavigation } from '../../hooks/useKeyboardNavigation';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 interface LayoutProps {
   children: ReactNode;
@@ -93,9 +94,8 @@ const Nav = styled.nav`
     justify-content: space-between;
     align-items: center;
     padding: 0 ${theme.spacing.md};
-    max-width: 1200px;
     margin: 0 auto;
-    width: 90%;
+    width: 100%;
   }
 `;
 
@@ -123,8 +123,92 @@ const NavLinks = styled.div`
     }
   }
 
-  @media (max-width: ${theme.breakpoints.sm}) {
-    gap: ${theme.spacing.md};
+  @media (max-width: ${theme.breakpoints.md}) {
+    display: none;
+  }
+`;
+
+const MobileMenuButton = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  color: ${theme.colors.primary};
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: ${theme.spacing.xs};
+  border-radius: 4px;
+  transition: all ${theme.transitions.default};
+
+  &:hover {
+    color: ${theme.colors.accent};
+    background-color: rgba(201, 184, 155, 0.1);
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+const MobileMenu = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: ${theme.colors.glass.background};
+  backdrop-filter: blur(20px);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: ${theme.spacing.xl};
+`;
+
+const MobileMenuHeader = styled.div`
+  position: absolute;
+  top: ${theme.spacing.lg};
+  right: ${theme.spacing.lg};
+`;
+
+const MobileMenuClose = styled.button`
+  background: none;
+  border: none;
+  color: ${theme.colors.primary};
+  font-size: 2rem;
+  cursor: pointer;
+  padding: ${theme.spacing.xs};
+  border-radius: 50%;
+  transition: all ${theme.transitions.default};
+
+  &:hover {
+    color: ${theme.colors.accent};
+    background-color: rgba(201, 184, 155, 0.1);
+  }
+`;
+
+const MobileNavLinks = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.xl};
+  text-align: center;
+
+  a {
+    color: ${theme.colors.primary};
+    font-size: 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all ${theme.transitions.default};
+    padding: ${theme.spacing.md};
+    border-radius: 12px;
+
+    &:hover {
+      color: ${theme.colors.accent};
+      background-color: rgba(201, 184, 155, 0.1);
+      transform: scale(1.05);
+    }
   }
 `;
 
@@ -153,23 +237,37 @@ const SkipLink = styled.a`
 export const Layout = ({ children }: LayoutProps) => {
   useKeyboardNavigation();
   const [isVisible, setIsVisible] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const scrollDirection = useRef<'up' | 'down' | null>(null);
   const lastScrollY = useRef(0);
   const navigationTimeout = useRef<number | null>(null);
   
+  // Keyboard navigation is handled by useKeyboardNavigation hook
+
+  // Prevent scrolling when mobile menu is open
   useEffect(() => {
-    // Add keyboard navigation instructions to console
-    console.info(
-      'Keyboard Navigation:\n',
-      '- Arrow Up/Down or PageUp/PageDown: Navigate between sections\n',
-      '- Home: Go to top\n',
-      '- End: Go to bottom'
-    );
-  }, []);
+    if (isMobileMenuOpen) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Restore scroll position and remove styles
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+  }, [isMobileMenuOpen]);
 
   // Function to show navbar (called from FloatingNav)
   const showNavbar = useCallback(() => {
-    console.log('showNavbar called, setting isVisible to true');
     setIsVisible(true);
     
     // Clear any existing timeout
@@ -191,9 +289,35 @@ export const Layout = ({ children }: LayoutProps) => {
     };
   }, [showNavbar]);
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleMobileNavClick = (sectionId: string) => {
+    closeMobileMenu();
+    setIsVisible(true);
+    // Add a small delay to ensure the menu closes before scrolling
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      
+      // Don't hide navbar on mobile devices
+      if (window.innerWidth <= 768) {
+        setIsVisible(true);
+        return;
+      }
       
       // Always show navbar at the top
       if (currentScrollY < 100) {
@@ -218,27 +342,16 @@ export const Layout = ({ children }: LayoutProps) => {
           // Scrolling down
           if (scrollDirection.current !== 'down') {
             scrollDirection.current = 'down';
-            console.log('Scrolling DOWN, hiding navbar');
             setIsVisible(false);
           }
         } else if (scrollDelta < 0) {
           // Scrolling up
           if (scrollDirection.current !== 'up') {
             scrollDirection.current = 'up';
-            console.log('Scrolling UP, showing navbar');
             setIsVisible(true);
           }
         }
       }
-      
-      console.log('Scroll:', { 
-        currentScrollY, 
-        lastScrollY: lastScrollY.current, 
-        scrollDelta,
-        scrollDirection: scrollDirection.current,
-        isVisible,
-        hasNavigationTimeout: !!navigationTimeout.current
-      });
       
       lastScrollY.current = currentScrollY;
     };
@@ -283,9 +396,38 @@ export const Layout = ({ children }: LayoutProps) => {
               <a href="#projects" onClick={() => setIsVisible(true)}>Projects</a>
               <a href="#contact" onClick={() => setIsVisible(true)}>Contact</a>
             </NavLinks>
+            <MobileMenuButton onClick={toggleMobileMenu} aria-label="Open mobile menu">
+              <FaBars />
+            </MobileMenuButton>
           </div>
         </Nav>
       </Header>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <MobileMenu
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+          >
+            <MobileMenuHeader>
+              <MobileMenuClose onClick={closeMobileMenu} aria-label="Close mobile menu">
+                <FaTimes />
+              </MobileMenuClose>
+            </MobileMenuHeader>
+            <MobileNavLinks role="list">
+              <a href="#hero" onClick={() => handleMobileNavClick('hero')}>Home</a>
+              <a href="#about" onClick={() => handleMobileNavClick('about')}>About</a>
+              <a href="#experience" onClick={() => handleMobileNavClick('experience')}>Experience</a>
+              <a href="#services" onClick={() => handleMobileNavClick('services')}>Services</a>
+              <a href="#projects" onClick={() => handleMobileNavClick('projects')}>Projects</a>
+              <a href="#contact" onClick={() => handleMobileNavClick('contact')}>Contact</a>
+            </MobileNavLinks>
+          </MobileMenu>
+        )}
+      </AnimatePresence>
+
       <Main id="main-content" role="main" tabIndex={-1}>
         {children}
       </Main>

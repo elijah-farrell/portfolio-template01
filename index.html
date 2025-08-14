@@ -7,7 +7,8 @@
     
     <!-- Performance Optimizations -->
     <link rel="modulepreload" href="/src/main.tsx" />
-    <link rel="preload" as="style" href="/src/index.css" />
+    <link rel="preload" href="/src/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/src/index.css" /></noscript>
     <meta http-equiv="Cache-Control" content="max-age=31536000" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />

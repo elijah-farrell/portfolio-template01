@@ -19,26 +19,29 @@ const ContactSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: relative;
-  padding: ${theme.spacing.lg} 0;
+  padding: 2rem 1rem;
   color: ${theme.colors.primary};
 
-  @media (min-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing.xl} 0;
+  @media (min-width: 768px) {
+    padding: 3rem 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 4rem 0;
   }
 `;
 
 const SectionTitle = styled(motion.h2)`
   text-align: center;
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  margin-bottom: calc(${theme.spacing.xl} * 1.5);
+  font-size: 2rem;
+  margin-bottom: 3rem;
   color: ${theme.colors.primary};
   position: relative;
   
   &::after {
     content: '';
     position: absolute;
-    bottom: -${theme.spacing.md};
+    bottom: -1rem;
     left: 50%;
     transform: translateX(-50%);
     width: 60px;
@@ -47,49 +50,53 @@ const SectionTitle = styled(motion.h2)`
     border-radius: 2px;
   }
 
-  @media (min-width: ${theme.breakpoints.md}) {
-    margin-bottom: calc(${theme.spacing.xl} * 2);
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
   }
 `;
 
 const ContactContent = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: ${theme.spacing.xl};
   max-width: 1200px;
   margin: 0 auto;
   width: 95%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 
-  @media (min-width: ${theme.breakpoints.md}) {
-    grid-template-columns: 1fr 1fr;
-    gap: ${theme.spacing.xl};
+  @media (min-width: 768px) {
     width: 90%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 85%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 80%;
   }
 `;
 
 const ContactInfo = styled(motion.div)`
   background: ${theme.colors.glass.background};
   backdrop-filter: blur(8px);
-  padding: ${theme.spacing.xl};
+  padding: 2rem;
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(201, 184, 155, 0.2);
-
-  @media (min-width: ${theme.spacing.md}) {
-    padding: calc(${theme.spacing.xl} * 1.5);
-  }
+  height: fit-content;
 `;
 
 const ContactTitle = styled.h3`
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  margin-bottom: ${theme.spacing.lg};
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
   color: ${theme.colors.primary};
   font-weight: 600;
 `;
 
 const ContactText = styled.p`
-  font-size: clamp(1rem, 1.2vw, 1.1rem);
-  line-height: 1.8;
-  margin-bottom: ${theme.spacing.lg};
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
   color: ${theme.colors.primary};
   opacity: 0.9;
 `;
@@ -97,21 +104,21 @@ const ContactText = styled.p`
 const ContactMethods = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${theme.spacing.md};
-  margin-bottom: ${theme.spacing.lg};
+  gap: 1rem;
+  margin-bottom: 2rem;
 `;
 
 const ContactMethod = styled.a`
   display: flex;
   align-items: center;
-  gap: ${theme.spacing.md};
+  gap: 1rem;
   color: ${theme.colors.accent};
   text-decoration: none;
   font-weight: 500;
-  font-size: clamp(0.95rem, 1.1vw, 1rem);
-  padding: ${theme.spacing.sm} ${theme.spacing.md};
+  font-size: 1rem;
+  padding: 1rem;
   border-radius: 12px;
-  transition: all ${theme.transitions.default};
+  transition: all 0.3s ease;
   background: rgba(201, 184, 155, 0.1);
 
   &:hover {
@@ -121,16 +128,17 @@ const ContactMethod = styled.a`
   }
 
   svg {
-    font-size: 1.1em;
+    font-size: 1.2em;
     flex-shrink: 0;
   }
 `;
 
 const SocialLinks = styled.div`
   display: flex;
-  gap: ${theme.spacing.md};
-  margin-top: ${theme.spacing.lg};
+  gap: 1rem;
+  margin-top: 2rem;
   flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const SocialLink = styled(motion.a)`
@@ -144,7 +152,7 @@ const SocialLink = styled(motion.a)`
   border-radius: 50%;
   color: ${theme.colors.accent};
   text-decoration: none;
-  transition: all ${theme.transitions.default};
+  transition: all 0.3s ease;
   box-shadow: 0 4px 16px rgba(201, 184, 155, 0.2);
 
   &:hover {
@@ -162,7 +170,7 @@ const SocialLink = styled(motion.a)`
 const CallToActionSection = styled(motion.div)`
   background: ${theme.colors.glass.background};
   backdrop-filter: blur(8px);
-  padding: ${theme.spacing.xl};
+  padding: 2rem;
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(201, 184, 155, 0.2);
   text-align: center;
@@ -170,23 +178,20 @@ const CallToActionSection = styled(motion.div)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  @media (min-width: ${theme.spacing.md}) {
-    padding: calc(${theme.spacing.xl} * 1.5);
-  }
+  height: fit-content;
 `;
 
 const CtaTitle = styled.h3`
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  margin-bottom: ${theme.spacing.md};
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
   color: ${theme.colors.primary};
   font-weight: 600;
 `;
 
 const CtaDescription = styled.p`
-  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  font-size: 1rem;
   line-height: 1.7;
-  margin-bottom: ${theme.spacing.lg};
+  margin-bottom: 2rem;
   color: ${theme.colors.primary};
   opacity: 0.9;
   max-width: 500px;
@@ -195,17 +200,17 @@ const CtaDescription = styled.p`
 const HireMeButton = styled(motion.a)`
   display: inline-flex;
   align-items: center;
-  gap: ${theme.spacing.md};
+  gap: 1rem;
   background: linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accent}80);
   color: ${theme.colors.light};
-  padding: ${theme.spacing.lg} ${theme.spacing.xl};
+  padding: 1.25rem 2rem;
   border-radius: 50px;
   text-decoration: none;
   font-weight: 700;
-  font-size: clamp(1.1rem, 1.3vw, 1.25rem);
-  transition: all ${theme.transitions.default};
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
   box-shadow: 0 8px 32px rgba(201, 184, 155, 0.3);
-  margin-bottom: ${theme.spacing.lg};
+  margin-bottom: 2rem;
 
   &:hover {
     transform: translateY(-3px);
@@ -214,7 +219,7 @@ const HireMeButton = styled(motion.a)`
   }
 
   svg {
-    transition: transform ${theme.transitions.default};
+    transition: transform 0.3s ease;
   }
 
   &:hover svg {
@@ -224,7 +229,7 @@ const HireMeButton = styled(motion.a)`
 
 const QuickLinks = styled.div`
   display: flex;
-  gap: ${theme.spacing.md};
+  gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
 `;
@@ -232,14 +237,14 @@ const QuickLinks = styled.div`
 const QuickLink = styled(motion.a)`
   display: inline-flex;
   align-items: center;
-  gap: ${theme.spacing.sm};
+  gap: 0.5rem;
   color: ${theme.colors.primary};
   text-decoration: none;
   font-weight: 500;
-  font-size: clamp(0.9rem, 1.1vw, 1rem);
-  padding: ${theme.spacing.sm} ${theme.spacing.md};
+  font-size: 0.95rem;
+  padding: 0.75rem 1.5rem;
   border-radius: 8px;
-  transition: all ${theme.transitions.default};
+  transition: all 0.3s ease;
   background: rgba(201, 184, 155, 0.1);
   border: 1px solid transparent;
 
@@ -286,25 +291,24 @@ const Contact = () => {
 
   return (
     <ContactSection id="contact" role="region" aria-label="Contact Information">
-      <div className="container">
-        <SectionTitle
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          role="heading"
-          aria-level={2}
-        >
-          Get In Touch
-        </SectionTitle>
-        
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <ContactContent>
+      <SectionTitle
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        role="heading"
+        aria-level={2}
+      >
+        Get In Touch
+      </SectionTitle>
+      
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <ContactContent>
             <ContactInfo variants={itemVariants}>
               <ContactTitle>Let's Connect</ContactTitle>
               <ContactText>
@@ -422,7 +426,6 @@ const Contact = () => {
             </CallToActionSection>
           </ContactContent>
         </motion.div>
-      </div>
     </ContactSection>
   );
 };

@@ -50,19 +50,11 @@ const SectionTitle = styled(motion.h2)`
 
 const ServicesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: 1fr;
   gap: ${theme.spacing.lg};
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 95%;
+  width: 100%;
 
-  @media (min-width: ${theme.breakpoints.md}) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: ${theme.spacing.xl};
-    width: 90%;
-  }
-
-  @media (min-width: ${theme.breakpoints.lg}) {
+  @media (min-width: 1024px) {
     grid-template-columns: repeat(3, 1fr);
     gap: ${theme.spacing.xl};
   }
@@ -71,7 +63,7 @@ const ServicesGrid = styled.div`
 const ServiceCard = styled(motion.div)`
   background: ${theme.colors.glass.background};
   backdrop-filter: blur(8px);
-  padding: ${theme.spacing.lg};
+  padding: ${theme.spacing.md};
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(201, 184, 155, 0.2);
   transition: all ${theme.transitions.default};
@@ -101,26 +93,44 @@ const ServiceCard = styled(motion.div)`
   }
 
   @media (min-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing.lg};
+  }
+
+  @media (min-width: ${theme.breakpoints.lg}) {
     padding: ${theme.spacing.xl};
   }
 `;
 
 const ServiceIcon = styled.div`
-  width: 80px;
-  height: 80px;
-  margin: 0 auto ${theme.spacing.lg};
+  width: 60px;
+  height: 60px;
+  margin: 0 auto ${theme.spacing.md};
   background: linear-gradient(135deg, ${theme.colors.accent}, ${theme.colors.accent}80);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: ${theme.colors.light};
-  font-size: 2rem;
+  font-size: 1.5rem;
   transition: all ${theme.transitions.default};
 
   ${ServiceCard}:hover & {
     transform: scale(1.1);
     box-shadow: 0 8px 24px rgba(201, 184, 155, 0.4);
+  }
+
+  @media (min-width: ${theme.breakpoints.md}) {
+    width: 70px;
+    height: 70px;
+    font-size: 1.75rem;
+    margin-bottom: ${theme.spacing.lg};
+  }
+
+  @media (min-width: ${theme.breakpoints.lg}) {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+    margin-bottom: ${theme.spacing.lg};
   }
 `;
 

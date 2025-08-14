@@ -53,6 +53,23 @@ const globalStyles = css`
     border: none;
     background: none;
     font-family: inherit;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    
+    &:focus {
+      outline: none;
+    }
+    
+    &:focus-visible {
+      outline: 2px solid ${theme.colors.accent};
+      outline-offset: 2px;
+    }
   }
 
   img {
