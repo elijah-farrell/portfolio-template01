@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { theme } from '../../styles/theme';
-import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
 const ExperienceSection = styled.section`
   min-height: 100vh;
@@ -303,7 +303,7 @@ const Experience = () => {
           viewport={{ once: true }}
         >
           <Timeline role="list">
-            {experienceData.map((job, index) => (
+            {experienceData.map((job) => (
               <TimelineItem 
                 key={job.id} 
                 variants={itemVariants}
