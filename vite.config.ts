@@ -14,12 +14,14 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom', 'framer-motion', '@emotion/react', '@emotion/styled'],
+          vendor: ['react', 'react-dom'],
+          motion: ['framer-motion'],
+          emotion: ['@emotion/react', '@emotion/styled'],
           icons: ['react-icons'],
         },
       },
     },
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500,
     minify: 'terser',
     terserOptions: {
       compress: {
