@@ -70,26 +70,28 @@ const ProjectCard = styled(motion.div)`
   }
 `;
 
-const ProjectImage = styled.div<{ imageUrl: string }>`
+const ProjectImage = styled.div`
   width: 100%;
-  height: 180px;
-  background-image: url(${props => props.imageUrl});
-  background-size: cover;
-  background-position: center;
-  position: relative;
-
-  @media (min-width: ${theme.breakpoints.md}) {
-    height: 220px;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: ${theme.colors.glass.background};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${theme.colors.accent};
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.3;
+  border: 2px solid rgba(201, 184, 155, 0.2);
+  margin-bottom: ${theme.spacing.md};
+  
+  img {
     width: 100%;
-    height: 40%;
-    background: linear-gradient(to top, ${theme.colors.glass.card}, transparent);
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 `;
 
@@ -175,25 +177,61 @@ const ProjectLinks = styled.div`
   }
 `;
 
-const projects = [
+const projectsData = [
   {
     id: 1,
-    title: "Project One",
-    description: "A full-stack web application with real-time features and modern UI/UX design.",
-    image: "https://via.placeholder.com/400x200",
-    techStack: ["React", "Node.js", "MongoDB", "Socket.IO"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    title: "Strategic Business Transformation",
+    description: "Led a comprehensive digital transformation initiative for a Fortune 500 company, resulting in 40% efficiency improvement and $2M annual cost savings.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+    imagePlaceholder: "Business transformation dashboard or process flow diagram",
+    technologies: ["Strategic Planning", "Change Management", "Performance Metrics"],
+    link: "#"
   },
   {
     id: 2,
-    title: "Project Two",
-    description: "Mobile-first e-commerce platform with seamless payment integration.",
-    image: "https://via.placeholder.com/400x200",
-    techStack: ["Next.js", "TypeScript", "Stripe", "Tailwind"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    title: "Cross-Functional Team Leadership",
+    description: "Managed a diverse team of 15 professionals across multiple departments, delivering a complex project 3 weeks ahead of schedule and 20% under budget.",
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop",
+    imagePlaceholder: "Team collaboration meeting or project timeline visualization",
+    technologies: ["Team Leadership", "Project Management", "Stakeholder Communication"],
+    link: "#"
   },
+  {
+    id: 3,
+    title: "Process Optimization Initiative",
+    description: "Redesigned core business processes that reduced operational costs by 35% while improving customer satisfaction scores by 25%.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+    imagePlaceholder: "Process flow chart or optimization metrics dashboard",
+    technologies: ["Process Analysis", "Lean Methodology", "Data Analytics"],
+    link: "#"
+  },
+  {
+    id: 4,
+    title: "Performance Coaching Program",
+    description: "Developed and implemented a comprehensive coaching program that improved team productivity by 30% and employee retention by 40%.",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+    imagePlaceholder: "Coaching session or performance improvement charts",
+    technologies: ["Leadership Development", "Performance Management", "Training Design"],
+    link: "#"
+  },
+  {
+    id: 5,
+    title: "Digital Innovation Strategy",
+    description: "Created a roadmap for digital innovation that positioned the organization as an industry leader and increased market share by 15%.",
+    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop",
+    imagePlaceholder: "Innovation strategy presentation or digital roadmap",
+    technologies: ["Digital Strategy", "Innovation Management", "Market Analysis"],
+    link: "#"
+  },
+  {
+    id: 6,
+    title: "Organizational Change Management",
+    description: "Successfully guided a major organizational restructuring that improved operational efficiency by 45% and employee engagement by 35%.",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+    imagePlaceholder: "Organizational chart or change management timeline",
+    technologies: ["Change Management", "Organizational Design", "Employee Engagement"],
+    link: "#"
+  }
 ];
 
 const Projects = () => {
@@ -238,7 +276,7 @@ const Projects = () => {
           viewport={{ once: true }}
         >
           <ProjectGrid role="list">
-          {projects.map((project) => (
+          {projectsData.map((project) => (
             <ProjectCard 
               key={project.id} 
               variants={itemVariants}
@@ -246,21 +284,26 @@ const Projects = () => {
               aria-labelledby={`project-title-${project.id}`}
             >
               <ProjectImage 
-                imageUrl={project.image} 
                 role="img" 
                 aria-label={`Screenshot of ${project.title}`} 
-              />
+              >
+                {project.image ? (
+                  <img src={project.image} alt={`Screenshot of ${project.title}`} />
+                ) : (
+                  project.imagePlaceholder
+                )}
+              </ProjectImage>
               <ProjectContent>
                 <ProjectTitle id={`project-title-${project.id}`}>{project.title}</ProjectTitle>
                 <ProjectDescription>{project.description}</ProjectDescription>
                 <TechStack role="list" aria-label={`Technologies used in ${project.title}`}>
-                  {project.techStack.map((tech) => (
+                  {project.technologies.map((tech) => (
                     <TechTag key={tech} role="listitem">{tech}</TechTag>
                   ))}
                 </TechStack>
                 <ProjectLinks>
                   <a 
-                    href={project.githubUrl} 
+                    href={project.link} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     aria-label={`View ${project.title} source code on GitHub`}
@@ -269,7 +312,7 @@ const Projects = () => {
                     <span className="sr-only">GitHub repository</span>
                   </a>
                   <a 
-                    href={project.liveUrl} 
+                    href={project.link} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     aria-label={`Visit ${project.title} live site`}

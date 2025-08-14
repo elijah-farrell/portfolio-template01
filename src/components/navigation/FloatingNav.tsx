@@ -139,10 +139,12 @@ const ProgressBar = styled(motion.div)`
 `;
 
 const sections = [
-  { id: 'hero', name: 'Home' },
-  { id: 'projects', name: 'Projects' },
-  { id: 'skills', name: 'Skills' },
-  { id: 'contact', name: 'Contact' }
+  'hero',
+  'about',
+  'experience',
+  'services',
+  'projects',
+  'contact'
 ];
 
 export const FloatingNav = () => {
@@ -157,27 +159,38 @@ export const FloatingNav = () => {
   useEffect(() => {
     const handleScroll = () => {
       const windowHeight = window.innerHeight;
+      let currentSection = 'hero';
       
       // Find which section is currently in view
-      sections.forEach(({ id, name }) => {
+      sections.forEach((id) => {
         const element = document.getElementById(id);
         if (element) {
           const { top, bottom } = element.getBoundingClientRect();
+          // Check if section is in the center of the viewport
           if (top <= windowHeight / 2 && bottom >= windowHeight / 2) {
-            setActiveSection(id);
-            // Update aria-live region
-            const liveRegion = document.getElementById('section-announcer');
-            if (liveRegion) {
-              liveRegion.textContent = `Current section: ${name}`;
-            }
+            currentSection = id;
           }
         }
       });
+      
+      // Update active section if it changed
+      if (currentSection !== activeSection) {
+        setActiveSection(currentSection);
+        // Update aria-live region
+        const liveRegion = document.getElementById('section-announcer');
+        if (liveRegion) {
+          const displayName = currentSection === 'hero' ? 'Home' : currentSection.charAt(0).toUpperCase() + currentSection.slice(1);
+          liveRegion.textContent = `Current section: ${displayName}`;
+        }
+      }
     };
 
+    // Initial call to set the correct active section
+    handleScroll();
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [activeSection]);
 
   const handleKeyDown = (e: React.KeyboardEvent, sectionId: string) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -185,13 +198,13 @@ export const FloatingNav = () => {
       document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
       e.preventDefault();
-      const currentIndex = sections.findIndex(({ id }) => id === sectionId);
+      const currentIndex = sections.findIndex((id) => id === sectionId);
       const nextIndex = e.key === 'ArrowUp' 
         ? Math.max(0, currentIndex - 1)
         : Math.min(sections.length - 1, currentIndex + 1);
       
       const nextSection = sections[nextIndex];
-      document.getElementById(nextSection.id)?.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById(nextSection)?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -215,21 +228,24 @@ export const FloatingNav = () => {
         role="navigation"
         aria-label="Section navigation"
       >
-        {sections.map(({ id, name }) => (
-          <NavDot
-            key={id}
-            active={activeSection === id}
-            onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}
-            onKeyDown={(e) => handleKeyDown(e, id)}
-            data-tooltip={name}
-            tabIndex={0}
-            aria-label={`${name} section ${activeSection === id ? '(current section)' : ''}`}
-            aria-current={activeSection === id ? 'true' : undefined}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
-            role="button"
-          />
-        ))}
+        {sections.map((id) => {
+          const displayName = id === 'hero' ? 'Home' : id.charAt(0).toUpperCase() + id.slice(1);
+          return (
+            <NavDot
+              key={id}
+              active={activeSection === id}
+              onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}
+              onKeyDown={(e) => handleKeyDown(e, id)}
+              data-tooltip={displayName}
+              tabIndex={0}
+              aria-label={`${displayName} section ${activeSection === id ? '(current section)' : ''}`}
+              aria-current={activeSection === id ? 'true' : undefined}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              role="button"
+            />
+          );
+        })}
       </NavContainer>
     </>
   );

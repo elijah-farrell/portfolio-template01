@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ReactNode, useEffect } from 'react';
 import { theme } from '../../styles/theme';
 import { FloatingNav } from '../navigation/FloatingNav';
+import PageFooter from './Footer';
 import { useKeyboardNavigation } from '../../hooks/useKeyboardNavigation';
 
 interface LayoutProps {
@@ -142,24 +143,6 @@ const SkipLink = styled.a`
   }
 `;
 
-const Footer = styled.footer`
-  background: ${theme.colors.glass.background};
-  backdrop-filter: blur(8px);
-  color: ${theme.colors.primary};
-  padding: ${theme.spacing.lg} 0;
-  text-align: center;
-  position: relative;
-  &::before {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: 0;
-    right: 0;
-    height: 20px;
-    background: linear-gradient(to top, ${theme.colors.glass.background}, transparent);
-  }
-`;
-
 export const Layout = ({ children }: LayoutProps) => {
   useKeyboardNavigation();
 
@@ -192,10 +175,12 @@ export const Layout = ({ children }: LayoutProps) => {
               Portfolio
             </Logo>
             <NavLinks role="list">
-              <a href="#about" role="listitem" aria-label="About section">About</a>
-              <a href="#projects" role="listitem" aria-label="Projects section">Projects</a>
-              <a href="#skills" role="listitem" aria-label="Skills section">Skills</a>
-              <a href="#contact" role="listitem" aria-label="Contact section">Contact</a>
+              <a href="#hero">Home</a>
+              <a href="#about">About</a>
+              <a href="#experience">Experience</a>
+              <a href="#services">Services</a>
+              <a href="#projects">Projects</a>
+              <a href="#contact">Contact</a>
             </NavLinks>
           </div>
         </Nav>
@@ -204,11 +189,7 @@ export const Layout = ({ children }: LayoutProps) => {
         {children}
       </Main>
       <FloatingNav />
-      <Footer role="contentinfo">
-        <div className="container">
-          <p>© {new Date().getFullYear()} Your Name. All rights reserved.</p>
-        </div>
-      </Footer>
+      <PageFooter />
     </LayoutWrapper>
   );
 };

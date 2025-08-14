@@ -2,6 +2,8 @@
 # Demo 
 https://simplec0de.github.io/portfolio-01/
 
+![Portfolio Preview](src/assets/default-preview.png)
+
 # Modern Portfolio Template
 
 A modern, responsive portfolio template built with React, TypeScript, and Vite. Features smooth animations, optimized performance, and accessibility-first design.
@@ -90,36 +92,7 @@ For other platforms (Vercel, Netlify, etc.):
 1. Remove or update the `base` property in `vite.config.ts`
 2. Follow the platform-specific deployment instructions
 
-## ⚙️ Development Features
 
-### Build Optimization
-
-The project includes several optimization features:
-
-- **Code Splitting**: Vendor chunks are automatically separated
-```typescript
-manualChunks: {
-  vendor: ['react', 'react-dom', 'framer-motion', '@emotion/react', '@emotion/styled'],
-  icons: ['react-icons']
-}
-```
-
-- **Compression**: Both Brotli and Gzip compression are enabled
-  - Brotli: Level 11 compression
-  - Gzip: Level 9 compression
-  - Threshold: 512 bytes
-
-- **Bundle Analysis**: Visualize your bundle size
-```bash
-npm run build
-# Opens bundle analysis in browser automatically
-```
-
-### Performance Monitoring
-
-- Bundle size visualization with `rollup-plugin-visualizer`
-- Compressed size reporting
-- Chunk size warnings (limit: 1000kb)
 
 ## 📦 Available Scripts
 
