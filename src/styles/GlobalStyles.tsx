@@ -96,6 +96,21 @@ const globalStyles = css`
     margin-inline: auto;
     padding-inline: ${theme.spacing.md};
     position: relative;
+
+    @media (max-width: 1024px) {
+      width: min(92%, 1100px);
+      padding-inline: ${theme.spacing.xl};
+    }
+
+    @media (max-width: 900px) {
+      width: 95%;
+      padding-inline: ${theme.spacing.xl};
+    }
+
+    @media (max-width: 768px) {
+      width: 95%;
+      padding-inline: ${theme.spacing.lg};
+    }
   }
 
   @media (max-width: ${theme.breakpoints.sm}) {

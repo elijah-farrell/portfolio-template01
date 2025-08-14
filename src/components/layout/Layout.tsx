@@ -93,9 +93,25 @@ const Nav = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 ${theme.spacing.md};
-    margin: 0 auto;
-    width: 100%;
+    width: min(90%, 1200px);
+    margin-inline: auto;
+    padding-inline: ${theme.spacing.md};
+    position: relative;
+
+    @media (max-width: 1024px) {
+      width: min(92%, 1100px);
+      padding-inline: ${theme.spacing.xl};
+    }
+
+    @media (max-width: 900px) {
+      width: 95%;
+      padding-inline: ${theme.spacing.xl};
+    }
+
+    @media (max-width: 768px) {
+      width: 95%;
+      padding-inline: ${theme.spacing.lg};
+    }
   }
 `;
 
@@ -116,10 +132,20 @@ const NavLinks = styled.div`
     font-weight: 500;
     padding: ${theme.spacing.xs} ${theme.spacing.sm};
     border-radius: 4px;
+    font-size: 1rem;
 
     &:hover {
       color: ${theme.colors.accent};
       background-color: rgba(201, 184, 155, 0.1);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    gap: ${theme.spacing.md};
+    
+    a {
+      font-size: 0.9rem;
+      padding: ${theme.spacing.xs};
     }
   }
 
