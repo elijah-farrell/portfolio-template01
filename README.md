@@ -4,8 +4,6 @@ https://ef-portfolio01.vercel.app/
 
 ![Portfolio Preview](src/assets/default-preview.png)
 
-> **Note**: This is a default preview image. Replace `src/assets/default-preview.png` with your own portfolio screenshot or hero image for a personalized preview.
-
 # Modern Portfolio Template
 
 A modern, responsive portfolio template built with React, TypeScript, and Vite. Features smooth animations, optimized performance, and accessibility-first design.
