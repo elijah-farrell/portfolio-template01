@@ -11,16 +11,7 @@ A modern, responsive portfolio template built with React, TypeScript, and Vite. 
 ## 🚀 Features
 
 - **Modern Tech Stack**: React 19, TypeScript, Vite 6
-- **Styled with Emotion**: Utilizes `@emotion/styled` for component-based styling
-- **Smooth Animations**: Powered by Framer Motion
-- **Optimized Performance**:
-  - Automatic code splitting
-  - Brotli & Gzip compression
-  - Lazy-loaded components
-  - Bundle size visualization
 - **Fully Responsive**: Works seamlessly on all devices
-- **Accessibility**: ARIA labels and semantic HTML
-- **Dark Mode Ready**: Built-in theming support
 
 ## 🛠️ Installation
 
@@ -46,35 +37,39 @@ npm run dev
 Edit the following files to customize your portfolio:
 
 1. `src/components/sections/Hero.tsx`:
-   - Update your name, title, and description
-   - Modify social media links
+   - Update your name, title, and description (currently shows placeholder text like "[Your Name]", "[Your Professional Title]")
+   - Modify social media links (GitHub, LinkedIn, Twitter, Instagram, Email)
+   - Update profile picture in `src/assets/pfp.jpg`
 
 2. `src/components/sections/Projects.tsx`:
    - Add your projects and their details
+   - Update project images in `src/assets/` directory
+   - Customize project descriptions, technologies, and links
 
-3. `src/components/sections/Skills.tsx`:
-   - Update your skills and expertise
+3. `src/components/sections/About.tsx`:
+   - Update your personal story and background
+   - Modify the about section image in `src/assets/about-pfp.jpg`
 
-4. `src/components/sections/Contact.tsx`:
-   - Customize contact information
+4. `src/components/sections/Services.tsx`:
+   - Customize the services you offer
+   - Update service descriptions and icons
+
+5. `src/components/sections/Experience.tsx`:
+   - Add your work experience and timeline
+   - Update company details and achievements
+
+6. `src/components/sections/Contact.tsx`:
+   - Customize contact information and form
+   - Update email addresses and contact details
 
 ### Styling
 - Theme customization: `src/styles/theme.ts`
 - Global styles: `src/styles/GlobalStyles.tsx`
+- Component-specific styles are defined within each component file
 
 ## 🚀 Deployment
 
-This template is configured for GitHub Pages deployment by default. The `vite.config.ts` is set up with:
-```typescript
-base: '/portfolio-01/'  // Change this to your repo name
-```
-
-To deploy:
-
-1. Update the `base` in `vite.config.ts` to match your repository name:
-```typescript
-base: '/your-repo-name/'
-```
+This template is configured for Vercel deployment by default.
 
 2. Build the project:
 ```bash
@@ -86,13 +81,9 @@ npm run build
    - Enable GitHub Pages in repository settings
    - Select the `gh-pages` branch as source
 
-### Alternative Deployment
+### Other Platforms (Github, Netlify, etc.)
 
-For other platforms (Vercel, Netlify, etc.):
-1. Remove or update the `base` property in `vite.config.ts`
-2. Follow the platform-specific deployment instructions
-
-
+- Follow the platform-specific deployment instructions
 
 ## 📦 Available Scripts
 

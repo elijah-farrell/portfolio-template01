@@ -331,9 +331,9 @@ const Contact = () => {
                   <FaMapMarkerAlt />
                   San Francisco, CA
                 </ContactMethod>
-                <ContactMethod href="https://example.com">
+                <ContactMethod href="https://elijahfarrell.com">
                   <FaGlobe />
-                  example.com
+                  elijahfarrell.com
                 </ContactMethod>
               </ContactMethods>
 
