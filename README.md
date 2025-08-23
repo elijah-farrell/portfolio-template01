@@ -71,15 +71,13 @@ Edit the following files to customize your portfolio:
 
 This template is configured for Vercel deployment by default.
 
-2. Build the project:
-```bash
-npm run build
-```
+1. Push your code to a GitHub, GitLab, or Bitbucket repository.
+2. Go to [Vercel](https://vercel.com) and import your repository.
+3. Select the correct project settings (Framework Preset: **Vite**).
+4. Click **Deploy**.
 
-3. Deploy to GitHub Pages:
-   - Push to your GitHub repository
-   - Enable GitHub Pages in repository settings
-   - Select the `gh-pages` branch as source
+Vercel will automatically build and deploy your project.  
+Every push to your main branch will trigger a new deployment.
 
 ### Other Platforms (Github, Netlify, etc.)
 
