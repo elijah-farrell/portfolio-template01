@@ -341,7 +341,15 @@ export const FloatingNav = () => {
       if (window.showNavbar) {
         window.showNavbar();
       }
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const headerHeight = 80;
+        const elementPosition = element.offsetTop - headerHeight;
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
+      }
     } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
       e.preventDefault();
       const currentIndex = sections.findIndex((id) => id === sectionId);
@@ -354,7 +362,15 @@ export const FloatingNav = () => {
       if (window.showNavbar) {
         window.showNavbar();
       }
-      document.getElementById(nextSection)?.scrollIntoView({ behavior: 'smooth' });
+      const element = document.getElementById(nextSection);
+      if (element) {
+        const headerHeight = 80;
+        const elementPosition = element.offsetTop - headerHeight;
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
+      }
     }
   };
 
@@ -363,7 +379,17 @@ export const FloatingNav = () => {
     if (window.showNavbar) {
       window.showNavbar();
     }
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    
+    const element = document.getElementById(sectionId);
+    if (element) {
+      // Account for fixed header height when scrolling
+      const headerHeight = 80; // Approximate header height
+      const elementPosition = element.offsetTop - headerHeight;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (

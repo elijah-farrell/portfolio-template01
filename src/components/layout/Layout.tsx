@@ -352,7 +352,7 @@ export const Layout = ({ children }: LayoutProps) => {
     // Set a timeout to prevent navbar from hiding during smooth scroll
     navigationTimeout.current = setTimeout(() => {
       navigationTimeout.current = null;
-    }, 1000); // 1 second delay
+    }, 2000); // 2 second delay to prevent hiding after navigation
   }, []);
 
   // Expose showNavbar function globally so FloatingNav can access it
@@ -378,9 +378,31 @@ export const Layout = ({ children }: LayoutProps) => {
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        // Account for fixed header height when scrolling
+        const headerHeight = 80; // Approximate header height
+        const elementPosition = element.offsetTop - headerHeight;
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
       }
-    }, 100);
+    }, 150);
+  };
+
+  const handleDesktopNavClick = (sectionId: string) => {
+    // Show navbar and prevent it from hiding
+    showNavbar();
+    
+    const element = document.getElementById(sectionId);
+    if (element) {
+      // Account for fixed header height when scrolling
+      const headerHeight = 80; // Approximate header height
+      const elementPosition = element.offsetTop - headerHeight;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   useEffect(() => {
@@ -463,12 +485,12 @@ export const Layout = ({ children }: LayoutProps) => {
               Portfolio
             </Logo>
             <NavLinks role="list">
-              <a href="#hero" onClick={() => setIsVisible(true)}>Home</a>
-              <a href="#about" onClick={() => setIsVisible(true)}>About</a>
-              <a href="#experience" onClick={() => setIsVisible(true)}>Experience</a>
-              <a href="#services" onClick={() => setIsVisible(true)}>Services</a>
-              <a href="#projects" onClick={() => setIsVisible(true)}>Projects</a>
-              <a href="#contact" onClick={() => setIsVisible(true)}>Contact</a>
+              <a href="#hero" onClick={(e) => { e.preventDefault(); handleDesktopNavClick('hero'); }}>Home</a>
+              <a href="#about" onClick={(e) => { e.preventDefault(); handleDesktopNavClick('about'); }}>About</a>
+              <a href="#experience" onClick={(e) => { e.preventDefault(); handleDesktopNavClick('experience'); }}>Experience</a>
+              <a href="#services" onClick={(e) => { e.preventDefault(); handleDesktopNavClick('services'); }}>Services</a>
+              <a href="#projects" onClick={(e) => { e.preventDefault(); handleDesktopNavClick('projects'); }}>Projects</a>
+              <a href="#contact" onClick={(e) => { e.preventDefault(); handleDesktopNavClick('contact'); }}>Contact</a>
             </NavLinks>
             <MobileMenuButton onClick={toggleMobileMenu} aria-label="Open mobile menu">
               <FaBars />
@@ -491,12 +513,12 @@ export const Layout = ({ children }: LayoutProps) => {
               </MobileMenuClose>
             </MobileMenuHeader>
             <MobileNavLinks role="list">
-              <a href="#hero" onClick={() => handleMobileNavClick('hero')}>Home</a>
-              <a href="#about" onClick={() => handleMobileNavClick('about')}>About</a>
-              <a href="#experience" onClick={() => handleMobileNavClick('experience')}>Experience</a>
-              <a href="#services" onClick={() => handleMobileNavClick('services')}>Services</a>
-              <a href="#projects" onClick={() => handleMobileNavClick('projects')}>Projects</a>
-              <a href="#contact" onClick={() => handleMobileNavClick('contact')}>Contact</a>
+              <a href="#hero" onClick={(e) => { e.preventDefault(); handleMobileNavClick('hero'); }}>Home</a>
+              <a href="#about" onClick={(e) => { e.preventDefault(); handleMobileNavClick('about'); }}>About</a>
+              <a href="#experience" onClick={(e) => { e.preventDefault(); handleMobileNavClick('experience'); }}>Experience</a>
+              <a href="#services" onClick={(e) => { e.preventDefault(); handleMobileNavClick('services'); }}>Services</a>
+              <a href="#projects" onClick={(e) => { e.preventDefault(); handleMobileNavClick('projects'); }}>Projects</a>
+              <a href="#contact" onClick={(e) => { e.preventDefault(); handleMobileNavClick('contact'); }}>Contact</a>
             </MobileNavLinks>
           </MobileMenu>
         )}

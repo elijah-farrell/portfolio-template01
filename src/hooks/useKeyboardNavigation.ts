@@ -24,23 +24,55 @@ export const useKeyboardNavigation = () => {
         case 'PageDown':
           e.preventDefault();
           if (currentIndex < sections.length - 1) {
-            document.getElementById(sections[currentIndex + 1])?.scrollIntoView({ behavior: 'smooth' });
+            const element = document.getElementById(sections[currentIndex + 1]);
+            if (element) {
+              const headerHeight = 80;
+              const elementPosition = element.offsetTop - headerHeight;
+              window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+              });
+            }
           }
           break;
         case 'ArrowUp':
         case 'PageUp':
           e.preventDefault();
           if (currentIndex > 0) {
-            document.getElementById(sections[currentIndex - 1])?.scrollIntoView({ behavior: 'smooth' });
+            const element = document.getElementById(sections[currentIndex - 1]);
+            if (element) {
+              const headerHeight = 80;
+              const elementPosition = element.offsetTop - headerHeight;
+              window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+              });
+            }
           }
           break;
         case 'Home':
           e.preventDefault();
-          document.getElementById(sections[0])?.scrollIntoView({ behavior: 'smooth' });
+          const homeElement = document.getElementById(sections[0]);
+          if (homeElement) {
+            const headerHeight = 80;
+            const elementPosition = homeElement.offsetTop - headerHeight;
+            window.scrollTo({
+              top: elementPosition,
+              behavior: 'smooth'
+            });
+          }
           break;
         case 'End':
           e.preventDefault();
-          document.getElementById(sections[sections.length - 1])?.scrollIntoView({ behavior: 'smooth' });
+          const endElement = document.getElementById(sections[sections.length - 1]);
+          if (endElement) {
+            const headerHeight = 80;
+            const elementPosition = endElement.offsetTop - headerHeight;
+            window.scrollTo({
+              top: elementPosition,
+              behavior: 'smooth'
+            });
+          }
           break;
       }
     };
