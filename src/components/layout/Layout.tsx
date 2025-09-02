@@ -190,13 +190,30 @@ const MobileMenu = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: ${theme.spacing.xl};
+  padding: ${theme.spacing.lg};
+  overflow-y: auto;
+
+  @media (max-height: 600px) {
+    padding: ${theme.spacing.md};
+    justify-content: flex-start;
+    padding-top: 5rem;
+  }
+
+  @media (max-height: 500px) {
+    padding: ${theme.spacing.sm};
+    padding-top: 4rem;
+  }
 `;
 
 const MobileMenuHeader = styled.div`
   position: absolute;
   top: ${theme.spacing.lg};
   right: ${theme.spacing.lg};
+
+  @media (max-height: 500px) {
+    top: ${theme.spacing.md};
+    right: ${theme.spacing.md};
+  }
 `;
 
 const MobileMenuClose = styled.button`
@@ -213,27 +230,58 @@ const MobileMenuClose = styled.button`
     color: ${theme.colors.accent};
     background-color: rgba(201, 184, 155, 0.1);
   }
+
+  @media (max-height: 500px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const MobileNavLinks = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${theme.spacing.xl};
+  gap: ${theme.spacing.lg};
   text-align: center;
 
   a {
     color: ${theme.colors.primary};
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 600;
     text-decoration: none;
     transition: all ${theme.transitions.default};
-    padding: ${theme.spacing.md};
+    padding: ${theme.spacing.sm} ${theme.spacing.md};
     border-radius: 12px;
 
     &:hover {
       color: ${theme.colors.accent};
       background-color: rgba(201, 184, 155, 0.1);
       transform: scale(1.05);
+    }
+  }
+
+  @media (max-height: 600px) {
+    gap: ${theme.spacing.md};
+    
+    a {
+      font-size: 1.25rem;
+      padding: ${theme.spacing.xs} ${theme.spacing.sm};
+    }
+  }
+
+  @media (max-height: 500px) {
+    gap: ${theme.spacing.sm};
+    
+    a {
+      font-size: 1.1rem;
+      padding: ${theme.spacing.xs};
+    }
+  }
+
+  @media (max-height: 400px) {
+    gap: ${theme.spacing.xs};
+    
+    a {
+      font-size: 1rem;
+      padding: ${theme.spacing.xs};
     }
   }
 `;
