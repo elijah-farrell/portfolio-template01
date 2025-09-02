@@ -214,6 +214,16 @@ const BookingButton = styled(motion.a)`
   font-size: clamp(1rem, 1.2vw, 1.1rem);
   transition: all ${theme.transitions.default};
   box-shadow: 0 4px 16px rgba(201, 184, 155, 0.3);
+  width: 100%;
+  max-width: 300px;
+  justify-content: center;
+
+  @media (max-width: 450px) {
+    padding: ${theme.spacing.sm} ${theme.spacing.md};
+    font-size: 0.9rem;
+    gap: ${theme.spacing.sm};
+    max-width: 100%;
+  }
 
   &:hover {
     transform: translateY(-2px);

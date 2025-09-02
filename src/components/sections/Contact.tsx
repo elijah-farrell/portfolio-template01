@@ -211,6 +211,16 @@ const HireMeButton = styled(motion.a)`
   transition: all 0.3s ease;
   box-shadow: 0 8px 32px rgba(201, 184, 155, 0.3);
   margin-bottom: 2rem;
+  width: 100%;
+  max-width: 300px;
+  justify-content: center;
+
+  @media (max-width: 450px) {
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+    gap: 0.75rem;
+    max-width: 100%;
+  }
 
   &:hover {
     transform: translateY(-3px);
